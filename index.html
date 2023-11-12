@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="index.css">
+  <title>CLOCK</title>
+
+</head>
+
+<body >
+
+  <div id="clock">
+    <div id="date" class="date"></div>
+    <div id="day"  class="date"></div>
+    <div id="time" class="time"></div>
+  </div>
+
+  <script>
+    function display() {
+      const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+      const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+
+      function getDateTime() {
+          const full = new Date();
+          const month = full.getMonth();
+          const year  = full.getFullYear();
+          const day   = full.getDay();
+          const date  = full.getDate();
+          const time  = full.getHours() + ":" + full.getMinutes() + ":" + full.getSeconds();
+
+          return {
+              date: `${date} ${months[month]} ${year}`,
+              day: days[day],
+              time: time
+          };
+      }
+
+      const container = document.getElementById("clock");
+      const date      = document.getElementById("date");
+      const day       = document.getElementById("day");
+      const time      = document.getElementById("time");
+
+      function updateDisplay() {
+        const dateTime = getDateTime();
+        date.innerHTML = `<p> ${dateTime.date}</p>`;
+        day.innerHTML = `<p> ${dateTime.day}</p>`;
+        time.innerHTML = `<p> ${dateTime.time}</p>`;
+      }
+
+      updateDisplay();
+
+      setInterval(updateDisplay, 1000);
+    }
+
+    display();
+  </script>
+
+</body>
+</html>
